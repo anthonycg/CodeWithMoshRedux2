@@ -1,23 +1,17 @@
 import store from "./store";
+import { bugAdded, bugRemoved, bugResolved } from "./actions";
 
 const unsubscribe = store.subscribe(() => {
     console.log("store changed!", store.getState());
 });
 
-store.dispatch({
-    type: "bugAddd",
-    payload: {
-        description: "Bug1",
-    },
-});
+// state = reducer(state, action)
+// notify the subscribers
 
-unsubscribe();
+store.dispatch(bugAdded("Bug 1"));
+store.dispatch(bugAdded("Bug 2"));
 
-store.dispatch({
-    type: "bugRemove",
-    payload: {
-        id: 1,
-    },
-});
+store.dispatch(bugRemoved(2));
+store.dispatch(bugResolved(1));
 
 console.log(store);
