@@ -1,6 +1,23 @@
-function sayHello() {
-    return "Hello World"
-}
+import store from "./store";
 
-let fn = sayHello;
-fn()
+const unsubscribe = store.subscribe(() => {
+    console.log("store changed!", store.getState());
+});
+
+store.dispatch({
+    type: "bugAddd",
+    payload: {
+        description: "Bug1",
+    },
+});
+
+unsubscribe();
+
+store.dispatch({
+    type: "bugRemove",
+    payload: {
+        id: 1,
+    },
+});
+
+console.log(store);
